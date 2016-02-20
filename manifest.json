@@ -7,7 +7,7 @@
       "matches": [
         "<all_urls>"
       ],
-        "js": ["jquery-1.12.0.min.js","content.js"]
+        "js": ["tracking-min.js", "face-min.js", "jquery-1.12.0.min.js","content.js"]
     }
   ],
   "browser_action": {
