@@ -7,21 +7,19 @@ window.overlayTrump = function(img, x, y, w, h) {
   trump.style.top = .94*y + "px";
   trump.style.left = x + "px";
 
-  trump.onload = function () {
-    var wrapper = document.createElement("div");
-    wrapper.class = "trumpWrapper";
-    wrapper.style.position = "relative";
-    img.parentElement.appendChild(wrapper);
-    img.parentElement.removeChild(img);
+  var wrapper = document.createElement("div");
+  wrapper.className = "trumpWrapper";
+  wrapper.style.position = "relative";
+  img.parentElement.appendChild(wrapper);
+  img.parentElement.removeChild(img);
 
-    wrapper.appendChild(img);
-    wrapper.appendChild(trump);
-  }
+  wrapper.appendChild(img);
+  wrapper.appendChild(trump);
 };
 
 window.trumpify = function(img) {
   var tracker = new tracking.ObjectTracker(['face']);
-  tracker.setStepSize(1.7);
+  tracker.setStepSize(.5);
 
   tracking.track(img, tracker);
   tracker.on('track', function(event) {
