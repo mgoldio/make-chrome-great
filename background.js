@@ -1,6 +1,6 @@
 window.plot = function(img, x, y, w, h) {
   var trump=document.createElement('img');
-  trump.src ='trump.png';
+  trump.src ='trump_cutouts/trump_cutout01';
   trump.style.width = 1.1*w + "px";
   trump.style.height = 1.1*h + "px";
   trump.style.position = "absolute";
@@ -20,9 +20,10 @@ window.plot = function(img, x, y, w, h) {
 //do facial recognition, choose trump face
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
+    debugger;
     if(request.message === "send_photo" ) {
       var photos = request.photos;
-
+      debugger;
       for each (var img in photos){
         var tracker = new tracking.ObjectTracker(['face']);
         tracker.setStepSize(1.7);

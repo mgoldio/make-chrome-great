@@ -15,5 +15,6 @@
   },
   "background": {
     "scripts": ["background.js"]
-  }
+  },
+    "web_accessible_resources": ["trump_cutouts/trump_cutout01.png"]
 }
