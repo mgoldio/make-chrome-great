@@ -18,6 +18,7 @@ window.overlayTrump = function(img, x, y, w, h) {
 };
 
 window.trumpify = function(img) {
+  debugger;
   var tracker = new tracking.ObjectTracker(['face']);
   tracker.setStepSize(.5);
 
