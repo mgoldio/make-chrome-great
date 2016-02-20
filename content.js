@@ -22,28 +22,14 @@ window.overlayTrump = function(img, x, y, w, h) {
 };
 
 window.trumpify = function(img) {
-  // Allow cross origin contamination
-  var crossImg = new Image();
-  crossImg.crossOrigin = "anonymous";
-  crossImg.width = img.width;
-  crossImg.style.width = img.width;
-  crossImg.height = img.height;
-  crossImg.style.height = img.height;
-  crossImg.src = img.src;
-
-  if (crossImg.width > 0 && crossImg.height > 0) {
-    crossImg.onload = function() {
-
-      $(img).faceDetection({
-        complete: function (faces) {
-          $.each(faces, function(index, face){
-            window.overlayTrump(img, face.x, face.y, face.width, face.height);
-          });
-        },
-        asynch: true
+  $(img).faceDetection({
+    complete: function (faces) {
+      $.each(faces, function(index, face){
+        window.overlayTrump(img, face.x, face.y, face.width, face.height);
       });
-    };
-  }
+    },
+    asynch: true
+  });
 };
 
 $(document).ready(function(){
