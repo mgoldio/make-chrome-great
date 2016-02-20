@@ -1,3 +1,7 @@
+function isOnScreen(elem) {
+  return ($(elem).offset().top) < ($(window).height());
+}
+
 window.overlayTrump = function(img, x, y, w, h) {
   var trump=document.createElement('img');
   trump.src =chrome.extension.getURL('trump_cutouts/trump_cutout01.png');
@@ -10,7 +14,7 @@ window.overlayTrump = function(img, x, y, w, h) {
   var wrapper = document.createElement("div");
   wrapper.className = "trumpWrapper";
   wrapper.style.position = "relative";
-  img.parentElement.appendChild(wrapper);
+  img.parentElement.insertBefore(wrapper, img);
   img.parentElement.removeChild(img);
 
   wrapper.appendChild(img);
@@ -31,7 +35,8 @@ window.trumpify = function(img) {
 
 $(document).ready(function(){
   $.each($("img"),function(index, img){
-    window.trumpify(img);
+    if(isOnScreen(img))
+      window.trumpify(img);
   });
 
   $(document).bind('DOMNodeInserted',function(e){
