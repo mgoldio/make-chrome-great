@@ -7,7 +7,7 @@
       "matches": [
         "<all_urls>"
       ],
-      "js": ["tracking-min.js", "face-min.js", "jquery-1.12.0.min.js", "content.js"]
+        "js": ["jquery-1.11.1.min.js", "jquery.facedetection.js", "content.js"]
     }
   ],
   "browser_action": {
@@ -16,5 +16,11 @@
   "background": {
     "scripts": ["background.js"]
   },
-  "web_accessible_resources": ["trump_cutouts/trump_cutout01.png"]
+    "web_accessible_resources": ["trump_cutouts/trump_cutout01.png"],
+    "permissions": [
+        "http://*/*",
+        "https://*/*",
+        "https://www.google.com/*",
+        "http://www.google.com/*"
+    ]
 }

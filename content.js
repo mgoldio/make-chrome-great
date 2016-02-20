@@ -4,12 +4,12 @@ function isOnScreen(elem) {
 
 window.overlayTrump = function(img, x, y, w, h) {
   var trump=document.createElement('img');
-  trump.src =chrome.extension.getURL('trump_cutouts/trump_cutout01.png');
-  trump.style.width = 1.1*w + "px";
-  trump.style.height = 1.1*h + "px";
+  trump.src = chrome.extension.getURL('trump_cutouts/trump_cutout01.png');
+  trump.style.width = 2*w + "px";
+  trump.style.height = 2*h + "px";
   trump.style.position = "absolute";
-  trump.style.top = .94*y + "px";
-  trump.style.left = x + "px";
+  trump.style.top = y - .5*h + "px";
+  trump.style.left = x - .5*w + "px";
 
   var wrapper = document.createElement("div");
   wrapper.className = "trumpWrapper";
@@ -22,16 +22,28 @@ window.overlayTrump = function(img, x, y, w, h) {
 };
 
 window.trumpify = function(img) {
-  debugger;
-  var tracker = new tracking.ObjectTracker(['face']);
-  tracker.setStepSize(.5);
+  // Allow cross origin contamination
+  var crossImg = new Image();
+  crossImg.crossOrigin = "anonymous";
+  crossImg.width = img.width;
+  crossImg.style.width = img.width;
+  crossImg.height = img.height;
+  crossImg.style.height = img.height;
+  crossImg.src = img.src;
 
-  tracking.track(img, tracker);
-  tracker.on('track', function(event) {
-    event.data.forEach(function(rect) {
-      window.overlayTrump(img, rect.x, rect.y, rect.width, rect.height);
-    });
-  });
+  if (crossImg.width > 0 && crossImg.height > 0) {
+    crossImg.onload = function() {
+
+      $(img).faceDetection({
+        complete: function (faces) {
+          $.each(faces, function(index, face){
+            window.overlayTrump(img, face.x, face.y, face.width, face.height);
+          });
+        },
+        asynch: true
+      });
+    };
+  }
 };
 
 $(document).ready(function(){
@@ -44,7 +56,6 @@ $(document).ready(function(){
     if ($(e.target).is("img")){
       // Not already trump
       if($(e.target).parent(".trumpWrapper").size == 0) {
-        debugger;
         window.trumpify(e.target);
       }
     }
