@@ -1,10 +1,11 @@
 function isOnScreen(elem) {
-  return ($(elem).offset().top) < ($(window).height());
+  return ($(elem).offset().top) < ($(window).height() + $(window).scrollTop());
 }
 
 window.overlayTrump = function(img, x, y, w, h) {
-  var trump=document.createElement('img');
-  trump.src =chrome.extension.getURL('trump_cutouts/trump_cutout01.png');
+  var trump=document.createElement("img");
+  $(trump).attr("isTrumpified", "true");
+  trump.src =chrome.extension.getURL("trump_cutouts/trump_cutout01.png");
   trump.style.width = 1.1*w + "px";
   trump.style.height = 1.1*h + "px";
   trump.style.position = "absolute";
@@ -22,11 +23,11 @@ window.overlayTrump = function(img, x, y, w, h) {
 };
 
 window.trumpify = function(img) {
-  var tracker = new tracking.ObjectTracker(['face']);
+  var tracker = new tracking.ObjectTracker(["face"]);
   tracker.setStepSize(.5);
 
   tracking.track(img, tracker);
-  tracker.on('track', function(event) {
+  tracker.on("track", function(event) {
     event.data.forEach(function(rect) {
       window.overlayTrump(img, rect.x, rect.y, rect.width, rect.height);
     });
@@ -35,20 +36,19 @@ window.trumpify = function(img) {
 
 $(document).ready(function(){
   $.each($("img"),function(index, img){
-    if(isOnScreen(img))
+    if(($(img).attr("isTrumpified") != "true") && isOnScreen(img)) {
+      $(img).attr("isTrumpified", "true");
       window.trumpify(img);
+    }
   });
 
-  $(document).bind('DOMNodeInserted',function(e){
-    if ($(e.target).is("img")){
-      // Not already trump
-      if($(e.target).parent(".trumpWrapper").size == 0) {
-        debugger;
-        window.trumpify(e.target);
+  $(document).bind("scroll", function(e){
+    $.each($("img"), function(index, img) {
+      if(($(img).attr("isTrumpified") != "true") && isOnScreen(img)) {
+        $(img).attr("isTrumpified", "true");
+        window.trumpify(img);
       }
-    }
+    });
   });
 });
 
-
-//chrome.runtime.sendMessage({"message": "send_photo", "photos": photos});
