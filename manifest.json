@@ -11,7 +11,7 @@
     }
   ],
   "browser_action": {
-    "default_icon": "iconOff.png"
+    "default_icon": "icon.png"
   },
   "background" : {
     "scripts" : ["background.js"]
@@ -22,5 +22,5 @@
         "https://www.google.com/*",
         "http://www.google.com/*"
     ],
-  "web_accessible_resources": ["trump_cutouts/trump_cutout01.png", "trump_cutouts/trump_cutout02.png"]
+  "web_accessible_resources": ["trump_cutouts/*", "trump_pics/*"]
 }

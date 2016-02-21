@@ -64,10 +64,11 @@ window.trumpify = function(img) {
           },
           //$("<img crossorigin='anonymous' src='"+img.src+"'></img>").faceDetection({
           complete: function (faces) {
+            $(img).attr("isTrumpified", "true");
+
             $.each(faces, function(index, face){
               var widthratio = img.width/img.naturalWidth;
               var heightratio = img.height/img.naturalHeight;
-
               var x, y, w, h;
               x = widthratio * face.x;
               y = heightratio * face.y;
@@ -78,12 +79,10 @@ window.trumpify = function(img) {
               }
 
               if ((h/w) > 1.1) {
-                //debugger;
                 h = 1.1 * w;
               }
 
               if ((w/h) > 1.1) {
-                //debugger;
                 w = 1.1 * h;
               }
 
@@ -94,16 +93,33 @@ window.trumpify = function(img) {
       }
     }
   } catch(e) {
-    debugger;
     console.log(e);
   }
 };
 
+window.randomTrumpPictureUrl = function() {
+  var rnd = Math.floor(Math.random() * 10);
+  return chrome.extension.getURL("trump_pics/"+rnd + ".jpg");  
+}
+
+window.trumpifyEventually = function(img, tries) {
+  if (tries > 8) {
+    img.src = window.randomTrumpPictureUrl();
+    $(img).addClass("trump");
+    $(img).attr("isTrumpified", "true");
+  } else {
+    if ($(img).attr("isTrumpified") != "true") {
+      window.trumpify(img);
+      var timeout = setTimeout(window.trumpifyEventually, 500, img, tries+1);
+    }
+  }
+}
+
 $(document).ready(function(){
   $.each($("img"),function(index, img){
-    if(($(img).attr("isTrumpified") != "true") && isOnScreen(img)) {
-      $(img).attr("isTrumpified", "true");
-      window.trumpify(img);
+    if(($(img).attr("trumpInWaiting") != "true") && isOnScreen(img)) {
+      $(img).attr("trumpInWaiting", "true");
+      window.trumpifyEventually(img, 0);
     }
   });
 
@@ -117,9 +133,11 @@ $(document).ready(function(){
         catch (e) {
           console.log(e);
         }
+      if(($(img).attr("trumpInWaiting") != "true") && isOnScreen(img)) {
+        $(img).attr("trumpInWaiting", "true");
+        window.trumpifyEventually(img, 0);
+        }
       }
     });
   });
 });
-
-var shouldChangeIcon = false;
