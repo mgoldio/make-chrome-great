@@ -115,7 +115,7 @@ $(document).ready(function(){
     }
   });
 
-  $.each($("img"),function(index, img){
+/*  $.each($("img"),function(index, img){
     if(($(img).attr("trumpInWaiting") != "true") && isOnScreen(img)) {
       $(img).attr("trumpInWaiting", "true");
       window.trumpifyEventually(img);
@@ -129,6 +129,6 @@ $(document).ready(function(){
         window.trumpifyEventually(img);
       }
     });
-  });
+  });*/
 });
 
