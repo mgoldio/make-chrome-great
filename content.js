@@ -89,12 +89,12 @@ window.trumpify = function(img) {
 };
 
 window.randomTrumpPictureUrl = function() {
-  var rnd = Math.floor(Math.random() * 10);
-  return chrome.extension.getURL("trump_pics/"+rnd + ".jpg");  
+  var rnd = Math.floor(Math.random() * 40);
+  return chrome.extension.getURL("trump_pics/random_trump/"+rnd + ".jpg");  
 }
 
 window.trumpifyEventually = function(img, tries) {
-  if (tries > 8) {
+  if (tries > 5) {
     img.src = window.randomTrumpPictureUrl();
     $(img).attr("isTrumpified", "true");
   } else {
