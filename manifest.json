@@ -13,5 +13,5 @@
   "browser_action": {
     "default_icon": "icon.png"
   },
-  "web_accessible_resources": ["trump_cutouts/trump_cutout01.png"]
+  "web_accessible_resources": ["trump_cutouts/trump_cutout01.png", "replacements.json"]
 }
