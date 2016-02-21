@@ -5,7 +5,7 @@ function isOnScreen(elem) {
 window.overlayTrump = function(img, x, y, w, h) {
   var trump=document.createElement("img");
   $(trump).attr("isTrumpified", "true");
-  trump.src =chrome.extension.getURL("trump_cutouts/trump_cutout01.png");
+  trump.src = chrome.extension.getURL("trump_cutouts/trump_cutout01.png");
   trump.style.width = 2*w + "px";
   trump.style.height = 2*h + "px";
   trump.style.position = "absolute";
@@ -88,10 +88,20 @@ window.trumpify = function(img) {
   }
 };
 
-window.trumpifyEventually = function(img) {
-  if ($(img).attr("isTrumpified") != "true") {
-    window.trumpify(img);
-    var timeout = setTimeout(window.trumpifyEventually, 1000, img);
+window.randomTrumpPictureUrl = function() {
+  var rnd = Math.floor(Math.random() * 10);
+  return chrome.extension.getURL("trump_pics/"+rnd + ".jpg");  
+}
+
+window.trumpifyEventually = function(img, tries) {
+  if (tries > 8) {
+    img.src = window.randomTrumpPictureUrl();
+    $(img).attr("isTrumpified", "true");
+  } else {
+    if ($(img).attr("isTrumpified") != "true") {
+      window.trumpify(img);
+      var timeout = setTimeout(window.trumpifyEventually, 500, img, tries+1);
+    }
   }
 }
 
@@ -99,7 +109,7 @@ $(document).ready(function(){
   $.each($("img"),function(index, img){
     if(($(img).attr("trumpInWaiting") != "true") && isOnScreen(img)) {
       $(img).attr("trumpInWaiting", "true");
-      window.trumpifyEventually(img);
+      window.trumpifyEventually(img, 0);
     }
   });
 
@@ -107,7 +117,7 @@ $(document).ready(function(){
     $.each($("img"), function(index, img) {
       if(($(img).attr("trumpInWaiting") != "true") && isOnScreen(img)) {
         $(img).attr("trumpInWaiting", "true");
-        window.trumpifyEventually(img);
+        window.trumpifyEventually(img, 0);
       }
     });
   });
