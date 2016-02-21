@@ -1,0 +1,14 @@
+[
+  {
+    "word" : "Marco|Jeb|John|Ted",
+    "replacements" : [
+      "Donald"
+    ]
+  },
+  {
+    "word" : "Rubio|Bush|Kasich|Cruz",
+    "replacements" : [
+      "Trump"
+    ]
+  }
+]

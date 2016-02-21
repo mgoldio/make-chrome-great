@@ -19,5 +19,5 @@
         "https://www.google.com/*",
         "http://www.google.com/*"
     ],
-  "web_accessible_resources": ["trump_cutouts/trump_cutout01.png"]
+  "web_accessible_resources": ["trump_cutouts/trump_cutout01.png", "replacements.json"]
 }
