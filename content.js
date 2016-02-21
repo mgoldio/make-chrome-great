@@ -49,7 +49,7 @@ $(document).ready(function(){
           var shittycanvas = hackDrawImageToCanvas(crossImg);
           $(shittycanvas).faceDetection({
             error: function (code, message) {
-              window.trumpify(img);
+              //window.trumpify(img);
             },
             //$("<img crossorigin='anonymous' src='"+img.src+"'></img>").faceDetection({
             complete: function (faces) {
@@ -111,7 +111,8 @@ $(document).ready(function(){
     }
     else if (!msg.message["disabled"]) {
       window.disabled = false;
-      trumpTextReplacement();
+      window.trumpTextReplacement();
+      window.trumpifyEverythingInSight();
     }
   });
 
@@ -136,23 +137,22 @@ $(document).ready(function(){
     });
   }
 
-  $.each($("img"),function(index, img){
-    if (!window.disabled) {
+  window.trumpifyEverythingInSight = function() {
+    $.each($("img"), function(index, img) {
       if(($(img).attr("trumpInWaiting") != "true") && isOnScreen(img)) {
         $(img).attr("trumpInWaiting", "true");
         window.trumpifyEventually(img, 0);
       }
-    }
-  });
+    });
+  }
+  
+  if (!window.disabled) {
+    window.trumpifyEverythingInSight();
+  }
 
   $(document).bind("scroll", function(e){
     if (!window.disabled) {
-      $.each($("img"), function(index, img) {
-        if(($(img).attr("trumpInWaiting") != "true") && isOnScreen(img)) {
-          $(img).attr("trumpInWaiting", "true");
-          window.trumpifyEventually(img, 0);
-        }
-      });
+      window.trumpifyEverythingInSight();
     }
   });
 });
