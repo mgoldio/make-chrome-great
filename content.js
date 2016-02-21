@@ -5,10 +5,16 @@ function isOnScreen(elem) {
 window.overlayTrump = function(img, x, y, w, h) {
   var trump = document.createElement("img");
   var rando = Math.floor(Math.random() * 10000000000);
-  if(rando%2 == 0) {
+  switch (rando%3) {
+    case 0:
     trump.src = chrome.extension.getURL('trump_cutouts/trump_cutout01.png');
-  } else {
-    trump.src = chrome.extension.getURL('trump_cutouts/trump_cutout02.png');
+    break;
+    case 1:
+    trump.src = chrome.extension.getURL('trump_cutouts/trump_cutout06.png');
+    break;
+    case 2:
+    trump.src = chrome.extension.getURL('trump_cutouts/trump_cutout06.png');
+    break;
   }
   $(trump).attr("isTrumpified", "true");
   $(trump).addClass("trump");
