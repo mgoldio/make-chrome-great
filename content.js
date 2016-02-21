@@ -11,15 +11,10 @@ window.overlayTrump = function(img, x, y, w, h) {
   trump.style.position = "absolute";
   trump.style.top = y - .5*h + "px";
   trump.style.left = x - .5*w + "px";
-
-  var wrapper = document.createElement("div");
-  wrapper.className = "trumpWrapper";
-  wrapper.style.position = "relative";
-  img.parentElement.insertBefore(wrapper, img);
-  img.parentElement.removeChild(img);
-
-  wrapper.appendChild(img);
-  wrapper.appendChild(trump);
+  trump.style.minHeight = 0 + "px";
+  trump.style.minWidth = 0 + "px";
+  
+  img.parentElement.appendChild(trump);
 };
 
  // Code taken from MatthewCrumley (http://stackoverflow.com/a/934925/298479)
