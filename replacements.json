@@ -1,0 +1,37 @@
+[
+  {
+    "word" : "(Marco|Jeb|John|Ted|Ben|Hillary|Bernie)",
+    "replacements" : [
+      "Donald",
+      "Donald J.",
+      "The Donald"
+    ]
+  },
+  {
+    "word" : "(Rubio|Bush|Kasich|Cruz|Carson|Clinton|Sanders)",
+    "replacements" : [
+      "Trump"
+    ]
+  },
+  {
+    "word" : " (important|large|pretty|old|good|big|little|small)",
+    "replacements" : [
+      " yuuge",
+      " yuuuuge",
+      " yuuuge",
+      " yuuuuuuge"
+    ]
+  },
+  {
+    "word" : " ([Ss]ocialism|[Dd]emocratic [Ss]ocialism)",
+    "replacements" : [
+      " Conservative Trumpism"
+    ]
+  },
+  {
+    "word" : " bridge",
+    "replacements" : [
+      " wall"
+    ]
+  }
+]

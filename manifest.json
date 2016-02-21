@@ -7,7 +7,7 @@
       "matches": [
         "<all_urls>"
       ],
-        "js": ["jquery-1.11.1.min.js", "jquery.facedetection.js", "content.js"]
+        "js": ["jquery-1.11.1.min.js", "jquery.facedetection.min.js", "content.js"]
     }
   ],
   "browser_action": {
@@ -22,5 +22,5 @@
         "https://www.google.com/*",
         "http://www.google.com/*"
     ],
-  "web_accessible_resources": ["trump_cutouts/*", "trump_pics/*"]
+  "web_accessible_resources": ["trump_cutouts/*", "trump_pics/*", "replacements.json"]
 }
