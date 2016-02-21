@@ -23,15 +23,35 @@
     ]
   },
   {
-    "word" : " ([Ss]ocialism|[Dd]emocratic [Ss]ocialism)",
+    "word" : " ([Dd]emocratic [Ss]ociali)",
     "replacements" : [
-      " Conservative Trumpism"
+      " Conservative Trumpi"
     ]
   },
   {
-    "word" : " bridge",
+    "word" : " ([Ss]ociali)",
     "replacements" : [
+      " Conservative Trumpi"
+    ]
+  }, 
+  {
+    "word" : " [Bb]ridge[. ;?]",
+    "replacements" : [
+      " Wall - and they're gonna pay for it ",
       " wall"
+    ]
+  },
+  {
+    "word" : "[Bb]ridge",
+    "replacements" : [
+      "Wall"
+    ]
+  },
+  {
+    "word" : "Mexican ",
+    "replacements" : [
+      "Mexican (some of whom I assume are good people) ",
+      "Mexican "
     ]
   }
 ]
