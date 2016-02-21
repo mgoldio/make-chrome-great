@@ -114,12 +114,15 @@ $(document).ready(function(){
     }
   });
 
-  $.getJSON(chrome.extension.getURL('replacements.json'), function(r) {
+$(document).ready(function(){
+  $.getJSON(chrome.extension.getURL("replacements.json"), function(r) {
     var textElems = ["a", "title", "p", "span", "h1", "h2", "h3", "h4", "h5", "h6", "li"];
     for(var j = 0; j < textElems.length; j++) {
       var type = textElems[j];
       $(type).each(function(index, elem) {
         var text = $(elem).html();
+        if(text.indexOf("<") !== -1)
+          return;
         var djt = text;
         for(var i = 0; i < r.length; i++) {
           var repl = r[i];
