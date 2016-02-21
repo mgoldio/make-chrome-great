@@ -117,17 +117,19 @@ $(document).ready(function(){
 
   window.trumpTextReplacement = function() {
     $.getJSON(chrome.extension.getURL('replacements.json'), function(r) {
-      var textElems = ["a", "title", "p", "span", "h1", "h2", "h3", "h4", "h5", "h6", "li"];
+      var textElems = ["a", "title", "p", "span", "h1", "h2", "h3", "h4", "h5", "h6", "li", "div"];
       for(var j = 0; j < textElems.length; j++) {
         var type = textElems[j];
         $(type).each(function(index, elem) {
           var text = $(elem).html();
+          if(text.indexOf("src=") !== -1)
+            return;
           var djt = text;
           for(var i = 0; i < r.length; i++) {
             var repl = r[i];
             djt = djt.replace(new RegExp(repl.word, "g"), 
-                              repl.replacements[Math.floor(Math.random() 
-                                                           * repl.replacements.length)]);
+              repl.replacements[Math.floor(Math.random() 
+              * repl.replacements.length)]);
           }
           if(djt != text)
             $(elem).html(djt);
