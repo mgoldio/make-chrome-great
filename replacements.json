@@ -14,7 +14,7 @@
     ]
   },
   {
-    "word" : " (important|large|pretty|old|good|big|little|small)",
+    "word" : " (important|large|pretty|old|big|little|small|young|disappointing|impressive)",
     "replacements" : [
       " yuuge",
       " yuuuuge",
@@ -51,7 +51,6 @@
     "word" : "Mexican ",
     "replacements" : [
       "Mexican (some of whom I assume are good people) ",
-      "Mexican "
     ]
   }
 ]
