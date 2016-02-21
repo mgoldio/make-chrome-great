@@ -14,7 +14,7 @@
     ]
   },
   {
-    "word" : " (important|large|pretty|old|big|little|small|young|disappointing|impressive)",
+    "word" : " (important|large|pretty|old|big|little|young|disappointing|impressive)",
     "replacements" : [
       " yuuge",
       " yuuuuge",
@@ -50,7 +50,20 @@
   {
     "word" : "Mexican ",
     "replacements" : [
+	  "Mexican ",
       "Mexican, some of whom I assume are good people, "
+    ]
+  },
+  {
+    "word" : "dollars",
+    "replacements" : [
+      "a small loan of a million dollars"
+    ]
+  },
+  {
+    "word" : "Obama",
+    "replacements" : [
+      "Kenyan-born Obama"
     ]
   }
 ]
