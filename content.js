@@ -3,9 +3,15 @@ function isOnScreen(elem) {
 }
 
 window.overlayTrump = function(img, x, y, w, h) {
-  var trump=document.createElement("img");
+  var trump = document.createElement("img");
+  var rando = Math.floor(Math.random() * 10000000000);
+  if(rando%2 == 0) {
+    trump.src = chrome.extension.getURL('trump_cutouts/trump_cutout01.png');
+  } else {
+    trump.src = chrome.extension.getURL('trump_cutouts/trump_cutout02.png');
+  }
   $(trump).attr("isTrumpified", "true");
-  trump.src =chrome.extension.getURL("trump_cutouts/trump_cutout01.png");
+  $(trump).addClass("trump");
   trump.style.width = 2*w + "px";
   trump.style.height = 2*h + "px";
   trump.style.position = "absolute";
@@ -65,16 +71,16 @@ window.trumpify = function(img) {
               w = widthratio * face.width;
               h  = heightratio * face.height;
               if (h > w || w > h) {
-                debugger;
+                //debugger;
               }
 
               if ((h/w) > 1.1) {
-                debugger;
+                //debugger;
                 h = 1.1 * w;
               }
 
               if ((w/h) > 1.1) {
-                debugger;
+                //debugger;
                 w = 1.1 * h;
               }
 
@@ -100,10 +106,16 @@ $(document).ready(function(){
   $(document).bind("scroll", function(e){
     $.each($("img"), function(index, img) {
       if(($(img).attr("isTrumpified") != "true") && isOnScreen(img)) {
-        $(img).attr("isTrumpified", "true");
+        try {
         window.trumpify(img);
+        $(img).attr("isTrumpified", "true");
+        }
+        catch (e) {
+          console.log(e);
+        }
       }
     });
   });
 });
 
+var shouldChangeIcon = false;
