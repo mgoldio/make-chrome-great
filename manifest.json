@@ -7,11 +7,14 @@
       "matches": [
         "<all_urls>"
       ],
-        "js": ["jquery-1.11.1.min.js", "jquery.facedetection.js", "jsapi", "content.js"]
+        "js": ["jquery-1.11.1.min.js", "jquery.facedetection.min.js", "content.js"]
     }
   ],
   "browser_action": {
     "default_icon": "icon.png"
+  },
+  "background" : {
+    "scripts" : ["background.js"]
   },
     "permissions": [
         "http://*/*",
@@ -19,5 +22,5 @@
         "https://www.google.com/*",
         "http://www.google.com/*"
     ],
-    "web_accessible_resources": ["trump_cutouts/trump_cutout01.png", "trump_pics/random_trump/*"]
+  "web_accessible_resources": ["trump_cutouts/*", "trump_pics/**/*", "replacements.json"]
 }
