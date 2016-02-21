@@ -1,4 +1,4 @@
-var toggle = false;
+var toggle = true;
 chrome.browserAction.onClicked.addListener(function(tab) {
   toggle = !toggle;
   if(toggle){
