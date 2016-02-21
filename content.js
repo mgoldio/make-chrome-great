@@ -53,6 +53,9 @@ window.trumpify = function(img) {
         // Allow cross origin contamination
         var shittycanvas = getBase64Image(crossImg);
         $(shittycanvas).faceDetection({
+          error: function (code, message) {
+            window.trumpify(img);
+          },
           //$("<img crossorigin='anonymous' src='"+img.src+"'></img>").faceDetection({
           complete: function (faces) {
             $.each(faces, function(index, face){
@@ -64,9 +67,6 @@ window.trumpify = function(img) {
               y = heightratio * face.y;
               w = widthratio * face.width;
               h  = heightratio * face.height;
-              if (h > w || w > h) {
-                debugger;
-              }
 
               if ((h/w) > 1.1) {
                 debugger;
@@ -85,6 +85,7 @@ window.trumpify = function(img) {
       }
     }
   } catch(e) {
+    debugger;
     console.log(e);
   }
 };
