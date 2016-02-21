@@ -89,6 +89,7 @@ $(document).ready(function(){
   }
 
   window.trumpifyEventually = function(img, tries) {
+    
     if (tries > 5) {
       img.src = window.randomTrumpPictureUrl();
       $(img).addClass("trump");
@@ -133,9 +134,11 @@ $(document).ready(function(){
   });
 
   $.each($("img"),function(index, img){
-    if(($(img).attr("trumpInWaiting") != "true") && isOnScreen(img)) {
-      $(img).attr("trumpInWaiting", "true");
-      window.trumpifyEventually(img, 0);
+    if (!window.disabled) {
+      if(($(img).attr("trumpInWaiting") != "true") && isOnScreen(img)) {
+        $(img).attr("trumpInWaiting", "true");
+        window.trumpifyEventually(img, 0);
+      }
     }
   });
 
